@@ -8,7 +8,7 @@ modifier le fichier env: login de votre base de donnée et le mot de passe de la
     DB_PASSWORD=root
 
 lancer les commandes suivantes
-
+composer update
 php artisan migrate
 php artisan db:seed
 
