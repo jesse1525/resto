@@ -29,14 +29,14 @@
                         <thead>
                         <tr>
                             <th>Menu</th>
-                            <th>Date de creation</th>
+                            <th>Détails</th>
                             <th class="disabled-sorting text-right">Actions</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>Menu</th>
-                            <th>Date de creation</th>
+                            <th>Détails</th>
                             <th class="disabled-sorting text-right">Actions</th>
                         </tr>
                         </tfoot>
@@ -44,7 +44,14 @@
                         @foreach ($menus as $menu)
                             <tr>
                                 <td>{{$menu->name}}</td>
-                                <td>{{$menu->created_at}}</td>
+                                <td class=" flex-lg-row"> 
+                                    @foreach($menu->items()->get() as $item)
+                                    <div class="btn-group m-1">
+                                        <button type="button" class="btn btn-primary">{{$item->title}} </button>
+                                        <button type="button" class="btn {{$item->category->id==1?'btn-success':'btn-danger'}}">{{$item->category->name}}</button>
+                                    </div>
+                                    @endforeach
+                                </td>
                                 <td class="text-right" style="display:flex">
                                     <a type="button" href="{{route('menus.edit',$menu->id)}}"  class="btn btn-success btn-icon btn-sm ">
                                         Modifier
