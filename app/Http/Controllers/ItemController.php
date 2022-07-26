@@ -67,18 +67,7 @@ class ItemController extends Controller
     }
     public function destroy($id){
         $item=Item::find($id);
-        /*$post = item::where('category_id','=',$item->id)->get();
-
-        $message = 'Suppression reussi!';
-        $type = 'success';
-        $titre = 'Felicitation';
-        if(count($post)>0){
-            $message ='impossible de supprimer, des articles sont associés à cette catégorie';
-            $type = 'error';
-            $titre = 'Attention';
-        }else{
-            Category::destroy($id);
-        }
+        $item->delete($id);
         return redirect()->route('categories.index');*/
        }
 }

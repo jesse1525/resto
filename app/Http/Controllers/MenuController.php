@@ -41,6 +41,7 @@ class MenuController extends Controller
         $form->remove('submit');
         return view('admin.menus.form',compact(['form']));
     }
+
     public function create(){
         $form = $this->getForm(new Menu());
         return view('admin.menus.form',compact('form'));
@@ -48,35 +49,28 @@ class MenuController extends Controller
 
     public function store(Request $request){
         $datas = $this->remove_token_key($request->all());
-        $menu = Menu::firstOrcreate(['name'=>$request->name]);
+        $menu = Menu::firstOrcreate(['name'=>$datas['name']]);
         $menu->Items()->attach($request->starter);
         $menu->Items()->attach($request->main);
-        $menu->Items()->attach($request->drinks);
+        $menu->Items()->attach($request->drink);
         return redirect()->route('menus.index');
     }
+
     public function edit(Menu $menu){
         $form = $this->getForm($menu);
         return view('admin.menus.form',compact('form'));
     }
+
     public function update($id,Request $request){
         $menu = Menu::find($id);
-        $menu->update($request->all());
-        return redirect()->route('menu.index');
+        $items = array_merge($request->starter,$request->main,$request->drink);
+        $menu->Items()->sync($items);
+        return redirect()->route('menus.index');
     }
+    
     public function destroy($id){
-        $menu=menu::find($id);
-        $post = Item::where('category_id','=',$menu->id)->get();
-
-        $message = 'Suppression reussi!';
-        $type = 'success';
-        $titre = 'Felicitation';
-        if(count($post)>0){
-            $message ='impossible de supprimer, des articles sont associés à cette catégorie';
-            $type = 'error';
-            $titre = 'Attention';
-        }else{
-            Menu::destroy($id);
-        }
+        $menu =Menu::find($id);
+        $menu->delete($id);
         return redirect()->route('menus.index');
        }
 }

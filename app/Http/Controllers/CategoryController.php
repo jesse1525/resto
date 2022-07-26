@@ -5,7 +5,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Http\Request;
 use App\Form\CategoryForm;
 use App\Models\Category;
-use App\Models\item;
+use App\Models\Item;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Lang;

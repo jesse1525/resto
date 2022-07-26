@@ -28,7 +28,7 @@ class Form extends \Kris\LaravelFormBuilder\Form{
     {
         $values= $this->getFieldValues();
         $values=array_filter($values, function($value){
-            return !is_null($value) && (!$value instanceof UploadedFile);
+            return !is_null($value) && (!$value instanceof UploadedFile) && !is_array($value);
         });
         foreach ($values as $name=>$value){
             $this->getModel()->$name=$value;

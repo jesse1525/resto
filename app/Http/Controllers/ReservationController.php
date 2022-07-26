@@ -7,7 +7,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use App\Form\CategoryForm;
 use App\Form\ReservationForm;
 use App\Models\Category;
-use App\Models\item;
+use App\Models\Item;
 use App\Models\Reservation;
 class ReservationController extends Controller
 {
